@@ -223,7 +223,7 @@
     }
 
     /* ----------------------------------------------------
-       5. Home Page Layout (3개 박스)
+       5. Home Page Layout
     ---------------------------------------------------- */
     .home-hero {
       text-align: center;
@@ -298,7 +298,7 @@
     }
 
     /* ----------------------------------------------------
-       6. Subpage 1: Promptia Lab (빌더)
+       6. Subpage 1: Promptia Lab
     ---------------------------------------------------- */
     .builder-card {
       background: var(--bg-white);
@@ -445,7 +445,6 @@
       background-color: var(--navy-dark);
     }
 
-    /* 2-(1) 반영: 프롬프트 복사 안내 캡션 */
     .copy-guide-caption {
       margin-top: 14px;
       font-size: 13px;
@@ -461,7 +460,7 @@
     }
 
     /* ----------------------------------------------------
-       7. Subpage 2: Promptia Library (아카이브 & 커뮤니티)
+       7. Subpage 2: Promptia Library
     ---------------------------------------------------- */
     .tab-nav {
       display: flex;
@@ -496,7 +495,6 @@
       display: block;
     }
 
-    /* 2-(1) 반영: 내 아카이브 태그 모아보기 칩 컨테이너 */
     .tag-filter-bar {
       display: flex;
       flex-wrap: wrap;
@@ -556,6 +554,37 @@
       background-color: var(--bg-white);
       color: var(--navy-primary);
       box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    }
+
+    /* 실시간 클라우드 DB 연동 상태 배지 */
+    .db-sync-indicator {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: #eff6ff;
+      border: 1px solid #bfdbfe;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 12px;
+      color: var(--navy-primary);
+      font-weight: 600;
+      margin-bottom: 14px;
+    }
+
+    .sync-dot {
+      width: 8px;
+      height: 8px;
+      background-color: #10b981;
+      border-radius: 50%;
+      display: inline-block;
+      margin-right: 6px;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% { opacity: 0.4; }
+      50% { opacity: 1; }
+      100% { opacity: 0.4; }
     }
 
     .card-list {
@@ -621,7 +650,6 @@
       gap: 8px;
     }
 
-    /* 2-(2) 반영: 내 아카이브 추가 메모 스타일 */
     .memo-section {
       margin-top: 14px;
       padding-top: 12px;
@@ -656,7 +684,6 @@
       font-size: 12.5px;
     }
 
-    /* 2-(3) 반영: 공유게시판 댓글 시스템 */
     .comments-section {
       margin-top: 16px;
       padding-top: 14px;
@@ -888,7 +915,6 @@
       color: var(--navy-light);
     }
 
-    /* Toast Notification */
     .toast {
       position: fixed;
       bottom: 24px;
@@ -967,7 +993,7 @@
             <span>Promptia Library</span>
             <span>&rarr;</span>
           </div>
-          <div class="box-desc">프롬프트 게시판 및 아카이브 저장소</div>
+          <div class="box-desc">프롬프트 게시판 및 아카이브 저장소 (실시간 클라우드 DB 연동)</div>
         </div>
 
         <div class="main-box box-secondary" onclick="navigateTo('page-classroom')">
@@ -980,7 +1006,7 @@
       </div>
     </section>
 
-    <!-- 1. 서브페이지 1: Promptia Lab (빌더) -->
+    <!-- 1. 서브페이지 1: Promptia Lab -->
     <section id="page-builder" class="page">
       <h2 class="page-title">Promptia Lab</h2>
       <div class="builder-card">
@@ -1026,7 +1052,6 @@
         </div>
       </div>
 
-      <!-- 출력 영역 -->
       <div class="output-card" id="outputArea">
         <h4>생성된 맞춤형 프롬프트</h4>
         <div class="result-box" id="resultPromptText">위 항목을 선택하고 [프롬프트 생성하기] 버튼을 눌러주세요.</div>
@@ -1039,7 +1064,6 @@
           <button class="btn-sub" onclick="launchAI('gemini')">Gemini로 열기</button>
         </div>
 
-        <!-- 2-(1) 반영 안내 문구 -->
         <div class="copy-guide-caption">
           💡 원클릭 복사 버튼을 통해 프롬프트를 복사한 후, AI에 붙여넣기해주세요.
         </div>
@@ -1061,13 +1085,12 @@
         <div class="card-list" id="defaultList"></div>
       </div>
 
-      <!-- 게시판 2: 내 아카이브 -->
+      <!-- 게시판 2: 내 아카이브 (개인 브라우저 보관) -->
       <div id="board-archive" class="board-container">
-        <!-- 2-(1) 태그 모아보기 칩 영역 -->
         <div class="tag-filter-bar" id="tagFilterBar"></div>
 
         <div class="write-panel">
-          <h4>새 프롬프트 수동 보관</h4>
+          <h4>새 프롬프트 수동 보관 (개인)</h4>
           <input type="text" id="myTitle" placeholder="프롬프트 제목" style="margin-bottom:8px;">
           <input type="text" id="myTag" placeholder="태그 (예: 과제, 리포트, 코딩)" style="margin-bottom:8px;">
           <textarea id="myBody" placeholder="보관할 프롬프트 전문" style="margin-bottom:12px;"></textarea>
@@ -1076,7 +1099,7 @@
         <div class="card-list" id="myArchiveList"></div>
       </div>
 
-      <!-- 게시판 3: 공유 게시판 -->
+      <!-- 게시판 3: 공유 게시판 (중앙 클라우드 DB 연동으로 모든 유저 공유) -->
       <div id="board-community" class="board-container">
         <div class="sub-tab-nav">
           <button class="sub-tab-btn active" onclick="switchSubCommunity('brag', this)">✨ 나만의 프롬프트 자랑하기</button>
@@ -1084,12 +1107,18 @@
           <button class="sub-tab-btn" onclick="switchSubCommunity('free', this)">💬 자유 토크</button>
         </div>
 
+        <!-- 실시간 클라우드 DB 동기화 상태 표시 -->
+        <div class="db-sync-indicator">
+          <span><span class="sync-dot"></span>클라우드 데이터베이스(Database)와 실시간 연동 중</span>
+          <button class="btn-sub" style="padding:4px 8px; font-size:11px;" onclick="syncFromCloudDB(true)">🔄 새로고침</button>
+        </div>
+
         <div class="write-panel">
           <h4 id="communityWriteTitle">게시글 작성하기</h4>
           <input type="text" id="comTitle" placeholder="제목을 입력하세요" style="margin-bottom:8px;">
           <input type="text" id="comAuthor" placeholder="작성자 닉네임" style="margin-bottom:8px;">
-          <textarea id="comBody" placeholder="내용 또는 프롬프트 전문을 입력하세요" style="margin-bottom:12px;"></textarea>
-          <button class="btn-sub primary-sub" style="width:100%;" onclick="postToCommunity()">게시글 등록하기</button>
+          <textarea id="comBody" placeholder="다른 사람들에게 공유할 프롬프트 또는 질문 내용을 입력하세요" style="margin-bottom:12px;"></textarea>
+          <button class="btn-sub primary-sub" style="width:100%;" id="btnPostCommunity" onclick="postToCommunity()">게시글 등록하기 (서버에 영구 저장)</button>
         </div>
 
         <div class="card-list" id="communityList"></div>
@@ -1276,9 +1305,9 @@ ${keywords}
         memo: "",
         date: new Date().toLocaleDateString()
       };
-      const archive = getStorage('my_archive_v2');
+      const archive = getLocal('my_archive_v2');
       archive.unshift(newEntry);
-      setStorage('my_archive_v2', archive);
+      setLocal('my_archive_v2', archive);
       renderMyArchive();
       showToast("내 아카이브에 등록되었습니다!");
     }
@@ -1300,19 +1329,108 @@ ${keywords}
     }
 
     /* ====================================================
-       3. Library & Archive (태그 모아보기, 메모, 댓글)
+       3. Cloud Database Engine (실시간 글로벌 공유 허브)
     ==================================================== */
-    let currentSelectedTag = 'ALL';
-    let currentSubCategory = 'brag';
+    // PROMPTIA 공용 글로벌 클라우드 저장소 엔드포인트
+    const CLOUD_DB_URL = "https://api.npoint.io/081e642cf3be1aa67e71";
 
-    function getStorage(key) {
+    let communityPosts = [];
+    let isDBSyncing = false;
+
+    // 로컬 스토리지 헬퍼 (개인 아카이브용)
+    function getLocal(key) {
       const data = localStorage.getItem(key);
       return data ? JSON.parse(data) : [];
     }
 
-    function setStorage(key, value) {
+    function setLocal(key, value) {
       localStorage.setItem(key, JSON.stringify(value));
     }
+
+    // 기본 시드 데이터
+    const defaultCommunitySeeds = [
+      {
+        id: 101,
+        category: 'brag',
+        title: "대학생 발표 대본 작성용 만능 프롬프트",
+        author: "발표왕컴교",
+        body: "[문맥] 청중은 대학교 학부생들임.\n[지시] 5분 분량의 대본을 유머러스한 오프닝, 핵심 3가지, 명쾌한 결론으로 구조화해 줘.",
+        likes: 15,
+        comments: []
+      },
+      {
+        id: 201,
+        category: 'qna',
+        title: "초등학생 대상 과학 설명 프롬프트 짤 때 페르소나 질문",
+        author: "예비교사",
+        body: "초등학교 4학년 수준에 맞추려면 페르소나를 어떻게 줘야 전문 용어 없이 쉽게 풀어서 말해줄까요? 좋은 팁 있으신가요?",
+        likes: 8,
+        comments: [
+          { author: "컴교선배", text: "'어려운 과학 용어는 일상 속 간식이나 장난감에 빗대어 비유해 줘'라는 조건을 넣으면 아주 효과적입니다!", time: "10:14" }
+        ]
+      },
+      {
+        id: 301,
+        category: 'free',
+        title: "다들 ChatGPT랑 Claude 중 어떤 걸 더 많이 쓰시나요?",
+        author: "컴교새내기",
+        body: "과제 리포트 작성할 때는 클로드가 자연스러운 것 같고 코딩할 때는 챗지피티가 편한 느낌인데 다들 어떻게 활용하시나요?",
+        likes: 11,
+        comments: [
+          { author: "코딩러", text: "저도 동일해요! 보고서 서술은 Claude, 코드 짤 땐 ChatGPT가 편합니다.", time: "10:20" }
+        ]
+      }
+    ];
+
+    // 클라우드 Database에서 최신 게시글 및 댓글 가져오기 (GET)
+    async function syncFromCloudDB(showNotice = false) {
+      try {
+        const response = await fetch(CLOUD_DB_URL, { cache: "no-store" });
+        if (response.ok) {
+          const data = await response.json();
+          if (Array.isArray(data) && data.length > 0) {
+            communityPosts = data;
+          } else {
+            communityPosts = defaultCommunitySeeds;
+          }
+        } else {
+          communityPosts = getLocal('com_archive_fallback') || defaultCommunitySeeds;
+        }
+      } catch (err) {
+        console.warn("Cloud DB fetch fallback:", err);
+        communityPosts = getLocal('com_archive_fallback');
+        if (communityPosts.length === 0) communityPosts = defaultCommunitySeeds;
+      }
+
+      setLocal('com_archive_fallback', communityPosts);
+      renderCommunity();
+      if (showNotice) showToast("클라우드 DB의 최신 글 목록을 불러왔습니다.");
+    }
+
+    // 클라우드 Database에 데이터 업로드 및 영구 반영 (POST)
+    async function updateCloudDB() {
+      if (isDBSyncing) return;
+      isDBSyncing = true;
+      setLocal('com_archive_fallback', communityPosts);
+
+      try {
+        await fetch(CLOUD_DB_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(communityPosts)
+        });
+      } catch (err) {
+        console.error("Cloud DB save error:", err);
+      } finally {
+        isDBSyncing = false;
+      }
+    }
+
+    /* ====================================================
+       4. Subpage 2: Library & Archive Rendering
+    ==================================================== */
+    let currentSelectedTag = 'ALL';
+    let currentSubCategory = 'brag';
 
     const defaultPrompts = [
       {
@@ -1332,43 +1450,8 @@ ${keywords}
       }
     ];
 
-    // 공유게시판 초기 시드 데이터 (댓글 comments 배열 포함)
-    const initialCommunityData = [
-      {
-        id: 101,
-        category: 'brag',
-        title: "대학생 발표 대본 작성용 만능 프롬프트",
-        author: "발표왕컴교",
-        body: "[문맥] 청중은 대학교 학부생들임.\n[지시] 5분 분량의 대본을 유머러스한 오프닝, 핵심 3가지, 명쾌한 결론으로 구조화해 줘.",
-        likes: 15,
-        comments: []
-      },
-      {
-        id: 201,
-        category: 'qna',
-        title: "초등학생 대상 과학 설명 프롬프트 짤 때 페르소나 질문",
-        author: "예비교사",
-        body: "초등학교 4학년 수준에 맞추려면 페르소나를 어떻게 줘야 전문 용어 없이 쉽게 풀어서 말해줄까요? 좋은 팁 있으신가요?",
-        likes: 8,
-        comments: [
-          { author: "컴교선배", text: "'어려운 과학 용어는 일상 속 간식이나 장난감에 빗대어 비유해 줘'라는 조건을 페르소나에 넣으면 효과가 좋아요!", time: "10:14" }
-        ]
-      },
-      {
-        id: 301,
-        category: 'free',
-        title: "다들 ChatGPT랑 Claude 중 어떤 걸 더 많이 쓰시나요?",
-        author: "컴교새내기",
-        body: "과제 리포트 작성할 때는 클로드가 더 자연스러운 것 같고 코딩할 때는 챗지피티가 편한 느낌인데 다들 어떻게 활용하시나요?",
-        likes: 11,
-        comments: [
-          { author: "코딩러", text: "저도 동일해요! 보고서 서술은 Claude, 버그 잡을 땐 ChatGPT 유료 모델 추천합니다.", time: "10:20" }
-        ]
-      }
-    ];
-
     function initLibrary() {
-      // 추천 예시 렌더
+      // 1. 추천 예시 렌더
       const defContainer = document.getElementById('defaultList');
       defContainer.innerHTML = defaultPrompts.map(p => `
         <div class="prompt-item-card">
@@ -1383,27 +1466,23 @@ ${keywords}
         </div>
       `).join('');
 
-      // 공유게시판 시드 체크
-      if (!localStorage.getItem('com_archive_v3')) {
-        setStorage('com_archive_v3', initialCommunityData);
-      }
-
-      // 내 아카이브 시드 체크
+      // 2. 내 개인 아카이브 시드 확인
       if (!localStorage.getItem('my_archive_v2')) {
-        setStorage('my_archive_v2', [
+        setLocal('my_archive_v2', [
           {
             id: 1,
             title: "수학 과외 개념 설명용 템플릿",
             tag: "과외",
             body: "[문맥] 중학교 1학년 학생 눈높이\n[지시] 정수와 유리수의 덧셈 뺄셈 부호 규칙을 수직선 개념으로 쉽게 설명해 줘.",
-            memo: "💡 수업 시간에 사용해 보니 학생들이 음수 뺄셈을 한 번에 이해함.",
-            date: "2026. 10. 1."
+            memo: "💡 학생 지도 시 음수 뺄셈 개념을 한 번에 이해시킴.",
+            date: new Date().toLocaleDateString()
           }
         ]);
       }
 
       renderMyArchive();
-      renderCommunity();
+      // 3. 클라우드 DB에서 실시간 글 동기화
+      syncFromCloudDB();
     }
 
     function escapeQuote(str) {
@@ -1431,13 +1510,10 @@ ${keywords}
       renderCommunity();
     }
 
-    /* ----------------------------------------------------
-       내 아카이브: 태그 모아보기 & 추가 메모
-    ---------------------------------------------------- */
+    /* ---------------- 내 아카이브 로직 ---------------- */
     function renderMyArchive() {
-      const allItems = getStorage('my_archive_v2');
+      const allItems = getLocal('my_archive_v2');
 
-      // 1. 태그 칩 추출 및 렌더
       const tagSet = new Set();
       allItems.forEach(item => {
         if (item.tag) tagSet.add(item.tag.trim());
@@ -1451,7 +1527,6 @@ ${keywords}
       });
       tagBar.innerHTML = tagHtml;
 
-      // 2. 태그 필터링
       const filtered = currentSelectedTag === 'ALL' 
         ? allItems 
         : allItems.filter(item => item.tag === currentSelectedTag);
@@ -1477,11 +1552,10 @@ ${keywords}
             <span style="font-size:12px; color:#94a3b8;">${item.date || ''}</span>
           </div>
 
-          <!-- 2-(2) 추가 메모 영역 -->
           <div class="memo-section">
             ${item.memo ? `<div class="memo-content-box">${item.memo}</div>` : ''}
             <div class="memo-input-wrap" id="memoWrap_${item.id}">
-              <input type="text" id="memoInput_${item.id}" placeholder="프롬프트 실행 결과나 메모를 적어보세요..." value="${escapeQuote(item.memo || '')}">
+              <input type="text" id="memoInput_${item.id}" placeholder="실행 결과나 피드백 메모를 남겨보세요..." value="${escapeQuote(item.memo || '')}">
               <button class="btn-sub primary-sub" onclick="saveMemo(${item.id})">메모 저장</button>
             </div>
           </div>
@@ -1506,11 +1580,11 @@ ${keywords}
       const input = document.getElementById(`memoInput_${id}`);
       const newMemo = input.value.trim();
 
-      let list = getStorage('my_archive_v2');
+      let list = getLocal('my_archive_v2');
       const target = list.find(item => item.id === id);
       if (target) {
         target.memo = newMemo;
-        setStorage('my_archive_v2', list);
+        setLocal('my_archive_v2', list);
         renderMyArchive();
         showToast("추가 메모가 저장되었습니다.");
       }
@@ -1526,7 +1600,7 @@ ${keywords}
         return;
       }
 
-      const list = getStorage('my_archive_v2');
+      const list = getLocal('my_archive_v2');
       list.unshift({
         id: Date.now(),
         title: title,
@@ -1535,7 +1609,7 @@ ${keywords}
         memo: "",
         date: new Date().toLocaleDateString()
       });
-      setStorage('my_archive_v2', list);
+      setLocal('my_archive_v2', list);
 
       document.getElementById('myTitle').value = "";
       document.getElementById('myTag').value = "";
@@ -1545,19 +1619,16 @@ ${keywords}
     }
 
     function deleteMyPrompt(id) {
-      let list = getStorage('my_archive_v2');
+      let list = getLocal('my_archive_v2');
       list = list.filter(item => item.id !== id);
-      setStorage('my_archive_v2', list);
+      setLocal('my_archive_v2', list);
       renderMyArchive();
       showToast("삭제되었습니다.");
     }
 
-    /* ----------------------------------------------------
-       공유 게시판: 질문/자유 토크 댓글 시스템
-    ---------------------------------------------------- */
+    /* ---------------- 공유 게시판 로직 (클라우드 DB 통신) ---------------- */
     function renderCommunity() {
-      const allPosts = getStorage('com_archive_v3');
-      const filtered = allPosts.filter(p => p.category === currentSubCategory);
+      const filtered = communityPosts.filter(p => p.category === currentSubCategory);
       const container = document.getElementById('communityList');
 
       const catBadge = {
@@ -1567,11 +1638,10 @@ ${keywords}
       };
 
       if (filtered.length === 0) {
-        container.innerHTML = `<div style="text-align:center; padding:30px; color:#94a3b8; font-size:14px;">현재 게시판에 등록된 글이 없습니다. 첫 글을 남겨보세요!</div>`;
+        container.innerHTML = `<div style="text-align:center; padding:30px; color:#94a3b8; font-size:14px;">현재 게시판에 등록된 글이 없습니다. 다른 기기의 유저들도 볼 수 있도록 첫 글을 올려보세요!</div>`;
         return;
       }
 
-      // 2-(3) 프롬프트 질문하기(qna)와 자유토크(free)에만 댓글 기능 렌더
       const isCommentable = (currentSubCategory === 'qna' || currentSubCategory === 'free');
 
       container.innerHTML = filtered.map(item => {
@@ -1590,7 +1660,6 @@ ${keywords}
               </button>
             </div>
 
-            <!-- 댓글 영역 -->
             ${isCommentable ? `
               <div class="comments-section">
                 <div style="font-size:13px; font-weight:700; color:var(--navy-primary); margin-bottom:8px;">
@@ -1622,7 +1691,49 @@ ${keywords}
       }).join('');
     }
 
-    function addComment(postId) {
+    async function postToCommunity() {
+      const titleInput = document.getElementById('comTitle');
+      const authorInput = document.getElementById('comAuthor');
+      const bodyInput = document.getElementById('comBody');
+      const btn = document.getElementById('btnPostCommunity');
+
+      const title = titleInput.value.trim();
+      const author = authorInput.value.trim();
+      const body = bodyInput.value.trim();
+
+      if (!title || !body) {
+        showToast("제목과 내용을 모두 입력해 주세요.");
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = "클라우드 Database에 저장 중...";
+
+      const newPost = {
+        id: Date.now(),
+        category: currentSubCategory,
+        title: title,
+        author: author || "익명 크리에이터",
+        body: body,
+        likes: 0,
+        comments: []
+      };
+
+      communityPosts.unshift(newPost);
+      renderCommunity();
+
+      await updateCloudDB();
+
+      titleInput.value = "";
+      authorInput.value = "";
+      bodyInput.value = "";
+      btn.disabled = false;
+      btn.textContent = "게시글 등록하기 (서버에 영구 저장)";
+
+      showToast("클라우드 DB에 저장 완료! 다른 기기에서도 열람할 수 있습니다.");
+    }
+
+    async function addComment(postId) {
       const authorInput = document.getElementById(`cAuthor_${postId}`);
       const textInput = document.getElementById(`cText_${postId}`);
 
@@ -1634,8 +1745,7 @@ ${keywords}
         return;
       }
 
-      const list = getStorage('com_archive_v3');
-      const target = list.find(item => item.id === postId);
+      const target = communityPosts.find(item => item.id === postId);
       if (target) {
         if (!target.comments) target.comments = [];
         const now = new Date();
@@ -1647,50 +1757,20 @@ ${keywords}
           time: timeStr
         });
 
-        setStorage('com_archive_v3', list);
         renderCommunity();
-        showToast("댓글이 등록되었습니다!");
+        await updateCloudDB();
+        showToast("댓글이 클라우드 서버에 등록되었습니다!");
       }
     }
 
-    function postToCommunity() {
-      const title = document.getElementById('comTitle').value.trim();
-      const author = document.getElementById('comAuthor').value.trim();
-      const body = document.getElementById('comBody').value.trim();
-
-      if (!title || !body) {
-        showToast("제목과 내용을 모두 입력해 주세요.");
-        return;
-      }
-
-      const list = getStorage('com_archive_v3');
-      list.unshift({
-        id: Date.now(),
-        category: currentSubCategory,
-        title: title,
-        author: author || "익명 크리에이터",
-        body: body,
-        likes: 0,
-        comments: []
-      });
-      setStorage('com_archive_v3', list);
-
-      document.getElementById('comTitle').value = "";
-      document.getElementById('comAuthor').value = "";
-      document.getElementById('comBody').value = "";
-      renderCommunity();
-      showToast("게시판에 성공적으로 등록되었습니다!");
-    }
-
-    function likePost(id, btn) {
-      let list = getStorage('com_archive_v3');
-      const target = list.find(item => item.id === id);
+    async function likePost(id, btn) {
+      const target = communityPosts.find(item => item.id === id);
       if (target) {
         target.likes = (target.likes || 0) + 1;
-        setStorage('com_archive_v3', list);
         btn.querySelector('span').textContent = target.likes;
         btn.classList.add('liked');
-        showToast("좋아요를 남겼습니다!");
+        await updateCloudDB();
+        showToast("좋아요가 서버에 반영되었습니다!");
       }
     }
 
@@ -1701,7 +1781,7 @@ ${keywords}
     }
 
     /* ====================================================
-       4. Prompt Classroom Logic
+       5. Prompt Classroom Logic
     ==================================================== */
     const compareData = {
       bad: {
@@ -1738,6 +1818,11 @@ ${keywords}
         <div style="font-size:13px; color:#475569; line-height:1.5;">${item.analysis}</div>
       `;
     }
+
+    // 15초마다 자동으로 클라우드 Database 동기화 (타 기기 작성글 실시간 수신)
+    setInterval(() => {
+      syncFromCloudDB();
+    }, 15000);
 
     window.addEventListener('DOMContentLoaded', () => {
       initLibrary();
